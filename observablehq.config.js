@@ -20,7 +20,7 @@ export default {
   head: '<link rel="icon" href="icon.png" type="image/png" sizes="32x32">',
 
   // The path to the source root.
-  root: "src",
+  root: "docs",
 
   // Some additional configuration options and their defaults:
   theme: "ink", // try "default", "light", "dark", "slate", "air", "cotton", "coffee", "deep-space", "ink", "midnight" etc.

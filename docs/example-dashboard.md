@@ -4,7 +4,7 @@ title: Example dashboard
 toc: false
 ---
 
-# Rocket launches 🚀
+# Chonky cats 🐈
 
 <!-- Load and transform the data -->
 
@@ -28,15 +28,15 @@ const color = Plot.scale({
 
 <div class="grid grid-cols-4">
   <div class="card">
-    <h2>United States 🇺🇸</h2>
+    <h2>Chonky Cats in Canada 🇨🇦 </h2>
     <span class="big">${launches.filter((d) => d.stateId === "US").length.toLocaleString("en-US")}</span>
   </div>
   <div class="card">
-    <h2>Russia 🇷🇺 <span class="muted">/ Soviet Union</span></h2>
+    <h2>Spanish Cats  🇪🇸<span class="muted">/ Soviet Union</span></h2>
     <span class="big">${launches.filter((d) => d.stateId === "SU" || d.stateId === "RU").length.toLocaleString("en-US")}</span>
   </div>
   <div class="card">
-    <h2>China 🇨🇳</h2>
+    <h2>Japanese cats 🇯🇵</h2>
     <span class="big">${launches.filter((d) => d.stateId === "CN").length.toLocaleString("en-US")}</span>
   </div>
   <div class="card">

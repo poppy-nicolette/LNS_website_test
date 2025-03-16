@@ -2,6 +2,8 @@
 toc: false
 ---
 
+<!-- Load the data -->
+
 <div class="hero">
   <h1>Literacy NS</h1>
   <h2>This is prototype 1. Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
@@ -47,6 +49,10 @@ toc: false
   </div>
 </div>
 ---
+<!-- table_1 for the entire dataset -->
+<div class = "grid grid-cols-1">
+    <div class="card">${resize((width) => Inputs.table(table_1))}</div>
+</div>
 
 ## Next steps
 

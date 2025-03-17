@@ -2,5 +2,4 @@ pandas
 numpy
 pandas
 openpyxl
-json = 3.13.2
 sys

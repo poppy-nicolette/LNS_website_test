@@ -1,6 +1,5 @@
 import pandas as pd
 import openpyxl
-import json
 import sys
 """
 This imports data from the LNS full metadata excel file

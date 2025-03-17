@@ -1,20 +1,19 @@
 ---
-title: Example report
+title: Point in time report
 ---
 
-# A brief history of space exploration
+# A summary of the scoping review
 
-This report is a brief overview of the history and current state of rocket launches and space exploration.
+This report is a brief overview of the scoping review conducted in 2024-2025.
 
 ## Background
 
-The history of rocket launches dates back to ancient China, where gunpowder-filled tubes were used as primitive forms of propulsion.
+The scoping review aimed to updated a prior review on types and definitions of
+literacy in Nova Scotia. The review was conducted by a team of researchers from Dalhousie University
+and Literacy Nova Scotia. The updated review includes studies, reports, and websites published
+from 2018 to 2024.
 
-Fast-forward to the 20th century during the Cold War era, the United States and the Soviet Union embarked on a space race, a competition to innovate and explore beyond Earth.
-
-This led to the launch of the first artificial satellite, Sputnik 1, and the crewed moon landing by Apollo 11. As technology advanced, rocket launches became synonymous with space exploration and satellite deployment.
-
-## The Space Shuttle era
+## Timeline of scoping review events
 
 ```js
 import {timeline} from "./components/timeline.js";
@@ -28,48 +27,17 @@ const events = FileAttachment("./data/events.json").json();
 timeline(events, {height: 300})
 ```
 
-### Sputnik 1 (1957)
+### The first scoping review
+The original scoping review was conducted in 2018 and focused on identifying the types and definitions of literacy used in Nova Scotia. The review identified a range of literacy types, including health literacy, digital literacy, and financial literacy.
 
-This was the first artificial satellite. Launched by the Soviet Union, it marked the beginning of the space age.
+### The second scoping review
 
-### Apollo 11 (1969)
+The second scoping review was conducted in 2024-2025 to update the findings of the original review. The updated review aimed to capture new developments in literacy research and practice in Nova Scotia.
 
-The historic Apollo 11 mission, led by NASA, marked the first successful human landing on the Moon. Astronauts Neil Armstrong and Buzz Aldrin became the first humans to set foot on the lunar surface.
+### Dashboard project
 
-### Viking 1 and 2 (1975)
+The dashboard project was initiated to visualize the findings of the scoping review and provide an interactive platform for stakeholders to explore the data. The dashboard includes visualizations of funding, locations, literacy types, and key findings from the review.
 
-NASA’s Viking program successfully launched two spacecraft, Viking 1 and Viking 2, to Mars. These missions were the first to successfully land and operate on the Martian surface, conducting experiments to search for signs of life.
+### Moving forward
 
-### Space Shuttle Columbia (1981)
-
-The first orbital space shuttle mission, STS-1, launched the Space Shuttle Columbia on April 12, 1981. The shuttle program revolutionized space travel, providing a reusable spacecraft for a variety of missions.
-
-### Hubble Space Telescope (1990)
-
-The Hubble Space Telescope has provided unparalleled images and data, revolutionizing our understanding of the universe and contributing to countless astronomical discoveries.
-
-### International Space Station (ISS) construction (1998—2011)
-
-The ISS, a collaborative effort involving multiple space agencies, began construction with the launch of its first module, Zarya, in 1998. Over the following years, various modules were added, making the ISS a symbol of international cooperation in space exploration.
-
-## Commercial spaceflight
-
-After the Space Shuttle program, a new era emerged with a shift towards commercial spaceflight.
-
-Private companies like Blue Origin, founded by Jeff Bezos in 2000, and SpaceX, founded by Elon Musk in 2002, entered the scene. These companies focused on developing reusable rocket technologies, significantly reducing launch costs.
-
-SpaceX, in particular, achieved milestones like the first privately developed spacecraft to reach orbit (Dragon in 2010) and the first privately funded spacecraft to dock with the ISS (Dragon in 2012).
-
-## Recent launch activity
-
-The proliferation of commercial space companies has driven a surge in global launch activity within the last few years.
-
-SpaceX’s Falcon 9 and Falcon Heavy, along with other vehicles from companies like Rocket Lab, have become workhorses for deploying satellites, conducting scientific missions, and ferrying crew to the ISS.
-
-The advent of small satellite constellations, such as Starlink by SpaceX, has further fueled this increase in launches. The push for lunar exploration has added momentum to launch activities, with initiatives like NASA’s Artemis program and plans for crewed missions to the Moon and Mars.
-
-## Looking forward
-
-As technology continues to advance and global interest in space exploration grows, the future promises even more exciting developments in the realm of rocket launches and space travel.
-
-Exploration will not only be limited to the Moon or Mars, but extend to other parts of our solar system such as Jupiter and Saturn’s moons, and beyond.
+A future Delphi study has been approved for funding and details on this study will be released soon.

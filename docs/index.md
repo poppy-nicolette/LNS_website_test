@@ -2,7 +2,7 @@
 toc: false
 ---
 
-<!-- Load the data -->
+<!-- Content -->
 
 <div class="hero">
   <h1>Literacy NS</h1>
@@ -49,26 +49,26 @@ toc: false
   </div>
 </div>
 ---
-<!-- table_1 for the entire dataset -->
-<div class = "grid grid-cols-1">
-    <div class="card">${resize((width) => Inputs.table(table_1))}</div>
-</div>
 
-## Next steps
+
+## Data sources
+```js
+const x = view(Inputs.range([0,100]));
+```
 
 
 <div class="grid grid-cols-4">
   <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)"><code>resize</code></a>.
+    Statistics Canada <a href="https://www150.statcan.gc.ca/n1/en/type/data?HPA=1">data source.</a>.
   </div>
   <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
+    Resources at the  <a href="https://resourcehub.literacyns.ca/activity?check_logged_in=1">LNS Resource Hub</a>
   </div>
   <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
+    Data tables from the <a href="https://www150.statcan.gc.ca/n1/en/catalogue/81-582-X"><code>Education Indicators in Canada</code></a> Report of the Pan-Canadian Education Indicators Program
   </div>
   <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
+      <span class="big">${x}</span>
   </div>
   <div class="card">
     Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.

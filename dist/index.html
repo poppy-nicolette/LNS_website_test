@@ -23,9 +23,14 @@
 
 import {define} from "./_observablehq/client.d32702ba.js";
 
-define({id: "dd71c638", mode: "inline", inputs: ["resize","Inputs","table_1","display"], body: async (resize,Inputs,table_1,display) => {
+define({id: "50d02970", inputs: ["view","Inputs"], outputs: ["x"], body: (view,Inputs) => {
+const x = view(Inputs.range([0,100]));
+return {x};
+}});
+
+define({id: "2d711642", mode: "inline", inputs: ["x","display"], body: async (x,display) => {
 display(await(
-resize((width) => Inputs.table(table_1))
+x
 ))
 }});
 
@@ -39,9 +44,6 @@ resize((width) => Inputs.table(table_1))
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
     <li class="observablehq-link observablehq-link-active"><a href="./">Literacy Nova Scotia</a></li>
   </ol>
-  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
-  <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.cdc630c8.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <section>
     <summary>Pages</summary>
     <ol>
@@ -53,7 +55,7 @@ resize((width) => Inputs.table(table_1))
 <script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<!-- Load the data -->
+<!-- Content -->
 <div class="hero">
   <h1>Literacy NS</h1>
   <h2>This is prototype 1. Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
@@ -99,23 +101,20 @@ resize((width) => Inputs.table(table_1))
   </div>
 </div>
 ---
-<!-- table_1 for the entire dataset -->
-<div class="grid grid-cols-1">
-    <div class="card"><observablehq-loading></observablehq-loading><!--:dd71c638:--></div>
-</div>
-<h2 id="next-steps" tabindex="-1"><a class="observablehq-header-anchor" href="#next-steps">Next steps</a></h2>
+<h2 id="data-sources" tabindex="-1"><a class="observablehq-header-anchor" href="#data-sources">Data sources</a></h2>
+<div class="observablehq observablehq--block"><!--:50d02970:--></div>
 <div class="grid grid-cols-4">
   <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot" target="_blank" rel="noopener noreferrer"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files" target="_blank" rel="noopener noreferrer"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)" target="_blank" rel="noopener noreferrer"><code>resize</code></a>.
+    Statistics Canada <a href="https://www150.statcan.gc.ca/n1/en/type/data?HPA=1" target="_blank" rel="noopener noreferrer">data source.</a>.
   </div>
   <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure" target="_blank" rel="noopener noreferrer">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
+    Resources at the  <a href="https://resourcehub.literacyns.ca/activity?check_logged_in=1" target="_blank" rel="noopener noreferrer">LNS Resource Hub</a>
   </div>
   <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select" target="_blank" rel="noopener noreferrer"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
+    Data tables from the <a href="https://www150.statcan.gc.ca/n1/en/catalogue/81-582-X" target="_blank" rel="noopener noreferrer"><code>Education Indicators in Canada</code></a> Report of the Pan-Canadian Education Indicators Program
   </div>
   <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders" target="_blank" rel="noopener noreferrer">data loader</a> that queries a local database or API, generating a data snapshot on build.
+      <span class="big"><observablehq-loading></observablehq-loading><!--:2d711642:--></span>
   </div>
   <div class="card">
     Import a <a href="https://observablehq.com/framework/imports" target="_blank" rel="noopener noreferrer">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet" target="_blank" rel="noopener noreferrer">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot" target="_blank" rel="noopener noreferrer">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex" target="_blank" rel="noopener noreferrer">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb" target="_blank" rel="noopener noreferrer">DuckDB</a>.

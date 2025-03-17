@@ -44,3 +44,10 @@ console.log(card_2_data[0].count);
     <span class="big"></span>
   </div>
 </div>
+<div>
+        <!-- table_1 for the entire dataset -->
+        <h1 style="color:var(--theme-foreground-focus)";>A table of some basic data</h1>
+        <div class = "grid grid-cols-1">
+            <div class="card">${resize((width) => Inputs.table(LNS_data))}</div>
+        </div>
+</div>

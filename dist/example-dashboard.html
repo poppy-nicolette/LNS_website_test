@@ -4,17 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="generator" content="Observable Framework v1.13.2">
-<title>Example dashboard | Literacy Nova Scotia</title>
+<title>Summary dashboard | Literacy Nova Scotia</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
 <link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="preload" as="style" href="./_npm/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
-<link rel="modulepreload" href="./_observablehq/client.d32702ba.js">
+<link rel="stylesheet" type="text/css" href="./_npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="modulepreload" href="./_observablehq/client.056b7b93.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.fc5dbcd7.js">
+<link rel="modulepreload" href="./_npm/leaflet@1.9.4/82e0844d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.56af3ea0.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
@@ -22,11 +25,17 @@
 <link rel="icon" href="./_file/icon.a622f8f7.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.d32702ba.js";
+import {define} from "./_observablehq/client.056b7b93.js";
 import {registerFile} from "./_observablehq/stdlib.fc5dbcd7.js";
 
 registerFile("./basic_table.json", {"name":"./basic_table.json","mimeType":"application/json","path":"./_file/basic_table.4f21c52b.json","lastModified":1742238745166,"size":24892});
 registerFile("./card_2.csv", {"name":"./card_2.csv","mimeType":"text/csv","path":"./_file/card_2.3c1e78ed.csv","lastModified":1742232410062,"size":9});
+
+define({id: "2ae703d0", outputs: ["L"], body: async () => {
+const L = await import("./_npm/leaflet@1.9.4/82e0844d.js");
+
+return {L};
+}});
 
 define({id: "7c87cfe5", inputs: ["FileAttachment"], outputs: ["LNS_data"], body: async (FileAttachment) => {
 console.log("Loading data...");
@@ -58,10 +67,57 @@ card_2_data[0].count
 ))
 }});
 
-define({id: "cfec44c3", mode: "inline", inputs: ["resize","Inputs","LNS_data","display"], body: async (resize,Inputs,LNS_data,display) => {
+define({id: "03ca14e1", inputs: ["view","Inputs","LNS_data"], outputs: ["search"], body: (view,Inputs,LNS_data) => {
+const search = view(Inputs.search(LNS_data, {placeholder: "Search title, year, is_oa, license, or version"}));
+return {search};
+}});
+
+define({id: "36abfe45", mode: "inline", inputs: ["resize","Inputs","search","display"], body: async (resize,Inputs,search,display) => {
 display(await(
-resize((width) => Inputs.table(LNS_data))
+resize((width) => Inputs.table(search,{width:{title:400},
+                                                                rows:20,
+                                                                columns: ["title",
+                                                                            "publication_year",
+                                                                            "is_oa",
+                                                                            "license",
+                                                                            "version",
+                                                                            "doi"],
+                                                                format: {"publication_year": d => d.toString()}
+                                                                }))
 ))
+}});
+
+define({id: "af9b6116", inputs: ["display","L"], outputs: ["div","map","popup","onMapClick"], body: (display,L) => {
+const div = display(document.createElement("div"));
+div.style = "height: 600px;";
+
+const map = L.map(div)
+  .setView([44.682, -63.744], 8);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+})
+  .addTo(map);
+
+L.marker([44.682, -63.744])
+  .addTo(map)
+  .bindPopup("A nice popup<br> indicating a point of interest.")
+  .openPopup();
+
+L.marker([45.100, -64.744])
+  .addTo(map)
+  .bindPopup("Location name<br> another point of interest.")
+  .openPopup();
+
+var popup = L.popup();
+function onMapClick(e) {
+  popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked the map at " + e.latlng.toString())
+    .openOn(map);
+}
+return {div,map,popup,onMapClick};
 }});
 
 </script>
@@ -79,6 +135,7 @@ resize((width) => Inputs.table(LNS_data))
     <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./example-dashboard">Summary Dashboard</a></li>
     <li class="observablehq-link"><a href="./example-report">Point in time Report</a></li>
+    <li class="observablehq-link"><a href="./project_documentation">Project Documentation</a></li>
     </ol>
   </section>
 </nav>
@@ -86,9 +143,11 @@ resize((width) => Inputs.table(LNS_data))
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
 <h1 id="lns-basic-table" tabindex="-1"><a class="observablehq-header-anchor" href="#lns-basic-table">LNS basic table 🫎</a></h1>
+<!-- import libraries -->
+<div class="observablehq observablehq--block"><!--:2ae703d0:--></div>
 <!-- Load and transform the data -->
 <div class="observablehq observablehq--block"><!--:7c87cfe5:--></div>
-<!-- Cards with big numbers -->
+<!-- import data for card 2 - experiment with data loader as a means to just use Python for data manipulation -->
 <div class="observablehq observablehq--block"><!--:dc9f477d:--></div>
 <!-- Cards with big numbers -->
 <div class="grid grid-cols-4">
@@ -110,13 +169,25 @@ resize((width) => Inputs.table(LNS_data))
   </div>
 </div>
 <div>
-        <!-- table_1 for the entire dataset -->
-        <h1 style="color:var(--theme-foreground-focus)" ;="">A table of some basic data</h1>
-        <div class="grid grid-cols-1">
-            <div class="card"><observablehq-loading></observablehq-loading><!--:cfec44c3:--></div>
-        </div>
+<!-- Search table -->
+<div>
+    <h1 style="color:var(--theme-foreground-focus)" ;="">A table of some basic data</h1>
+    <span style="color:var(--theme-foreground-focus)" ;="">Search for a specific title, year, is_oa, license, or version. Each term can be separated by a space and assumes an AND operator.
+    </span>
+    <p>See the documentation on search <a href="https://github.com/observablehq/inputs?tab=readme-ov-file#search" target="_blank" rel="noopener noreferrer">here.</a></p>
 </div>
-</main>
+<div class="observablehq observablehq--block"><!--:03ca14e1:--></div>
+<div class="grid grid-cols-1">
+    <div class="card"><observablehq-loading></observablehq-loading><!--:36abfe45:--></div>
+</div>
+<!--  Map of Nova Scotia see documentation here: https://observablehq.com/framework/lib/leaflet -->
+<div class="grid grid-cols-1">
+    <h1 style="color:var(--theme-foreground-focus)" ;="">A map</h1>
+    <span>Map of Nova Scotia</span>
+</div>
+<div class="observablehq observablehq--block"><!--:af9b6116:--></div>
+<p>More documentation on Leaflet can be found <a href="https://leafletjs.com/examples/quick-start/" target="_blank" rel="noopener noreferrer">here.</a>Map data from OpenStreetMap is copyrighted and is available under the <a href="https://openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">Open Database license.</a></p>
+</div></main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Literacy Nova Scotia</span></a><a rel="next" href="./example-report"><span>Point in time Report</span></a></nav>
 <div>Built with Observable. And by Poppy Riddle 2025.</div>

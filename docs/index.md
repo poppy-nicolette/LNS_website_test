@@ -68,10 +68,11 @@ const x = view(Inputs.range([0,100]));
     Data tables from the <a href="https://www150.statcan.gc.ca/n1/en/catalogue/81-582-X"><code>Education Indicators in Canada</code></a> Report of the Pan-Canadian Education Indicators Program
   </div>
   <div class="card">
-      <span class="big">${x}</span>
+      This calls the number from the slider.<br><span class="big"; style="color:magenta";>${Math.round(x)}</span>
   </div>
   <div class="card">
-    Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
+    Adult education centres in Nova Scotia can be found<a href="https://novascotia.ca/adult-learning/community-learning-organizations.pdf"> here.</a><br>
+        We can add these to the map on the Summary Dashboard.
   </div>
   <div class="card">
     Ask for help, or share your work or ideas, on our <a href="https://github.com/observablehq/framework/discussions">GitHub discussions</a>.

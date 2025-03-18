@@ -12,6 +12,7 @@ export default {
       pages: [
         { name: "Summary Dashboard", path: "/example-dashboard" },
         { name: "Point in time Report", path: "/example-report" },
+        { name: "Project Documentation", path: "/project_documentation" },
       ],
     },
   ],

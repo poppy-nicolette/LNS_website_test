@@ -10,13 +10,13 @@
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
-<link rel="modulepreload" href="./_observablehq/client.056b7b93.js">
+<link rel="modulepreload" href="./_observablehq/client.d19ca2dd.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.fc5dbcd7.js">
 <link rel="icon" href="./_file/icon.a622f8f7.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import "./_observablehq/client.056b7b93.js";
+import "./_observablehq/client.d19ca2dd.js";
 
 </script>
 </head>
@@ -33,6 +33,7 @@ import "./_observablehq/client.056b7b93.js";
     <ol>
     <li class="observablehq-link"><a href="./example-dashboard">Summary Dashboard</a></li>
     <li class="observablehq-link"><a href="./example-report">Point in time Report</a></li>
+    <li class="observablehq-link"><a href="./biblio_analysis">Bibliometric Analysis</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./project_documentation">Project Documentation</a></li>
     </ol>
   </section>
@@ -100,9 +101,34 @@ import "./_observablehq/client.056b7b93.js";
         See <a href="https://observablehq.com/framework/javascript" target="_blank" rel="noopener noreferrer">here</a> for more info on Javascript in Observable.</p>
   </div>
 </div>
+<div class="grid grid-cols-2">
+  <div>
+      <p>I investigated using other site generators, such as Shiny and Streamlit. Both provide
+          excellent freedom of design, fast prototyping, and reactive, interactive web pages. However
+          they lacked Observable's development feature which shows immediate change. Observable is
+          also easier to host on other servers. Shiny (both its R and Python versions) and Streamlit
+          can also be hosted on other servers, but require using Docker or other containers, which I felt was
+          too complex for longterm maintenance. </p>
+  </div>
+  <div class="card">
+    <h2 style="color:var(--theme-foreground-focus)" ;="">Remote Hosting vs Observable</h2>
+    <p>The resulting site can be <a href="https://observablehq.com/framework/deploying" target="_blank" rel="noopener noreferrer">deployed</a> on Observable Cloud with your files stored locally or on <a href="https://observablehq.com/documentation/data-apps/github" target="_blank" rel="noopener noreferrer">Github</a>.<br>
+    </p>
+  </div>
+  </div>
+<hr>
+<h2 style="color:var(--theme-foreground-focus)" ;="">Why Observable and not Shiny or Streamlit?</h2>
+  <p>
+        - Faster client-side loading<br>
+        - Data loaders can be written in many languages<br>
+        - Markdown and Javascript main pages <br>
+        - Able to host on LNS's servers or Github<br>
+        - Not dependent on R or Python knowledge<br>
+        - Hopefully easier for LNS personnel to maintain<br>
+    </p>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./example-report"><span>Point in time Report</span></a></nav>
+<nav><a rel="prev" href="./biblio_analysis"><span>Bibliometric Analysis</span></a></nav>
 <div>Built with Observable. And by Poppy Riddle 2025.</div>
 </footer>
 </div>

@@ -67,3 +67,31 @@ This project is built using <a href="https://observablehq.com/framework/what-is-
         See <a href="https://observablehq.com/framework/javascript">here</a> for more info on Javascript in Observable.</p>
   </div>
 </div>
+
+<div class="grid grid-cols-2">
+  <div>
+      <p>I investigated using other site generators, such as Shiny and Streamlit. Both provide
+          excellent freedom of design, fast prototyping, and reactive, interactive web pages. However
+          they lacked Observable's development feature which shows immediate change. Observable is
+          also easier to host on other servers. Shiny (both its R and Python versions) and Streamlit
+          can also be hosted on other servers, but require using Docker or other containers, which I felt was
+          too complex for longterm maintenance. </p>
+  </div>
+
+  <div class="card">
+    <h2 style="color:var(--theme-foreground-focus)";>Remote Hosting vs Observable</h2>
+    <p>The resulting site can be <a href="https://observablehq.com/framework/deploying">deployed</a> on Observable Cloud with your files stored locally or on <a href="https://observablehq.com/documentation/data-apps/github">Github</a>.<br>
+    </p>
+  </div>
+  </div>
+
+--------------------------------------------
+<h2 style="color:var(--theme-foreground-focus)";>Why Observable and not Shiny or Streamlit?</h2>
+  <p>
+        - Faster client-side loading<br>
+        - Data loaders can be written in many languages<br>
+        - Markdown and Javascript main pages <br>
+        - Able to host on LNS's servers or Github<br>
+        - Not dependent on R or Python knowledge<br>
+        - Hopefully easier for LNS personnel to maintain<br>
+    </p>

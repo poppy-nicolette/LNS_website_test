@@ -75,36 +75,35 @@ const search = view(Inputs.search(LNS_data, {placeholder: "Search title, year, i
 </div>
 
 <!--  Map of Nova Scotia see documentation here: https://observablehq.com/framework/lib/leaflet -->
-
-<div class = "grid grid-cols-1">
-    <h1 style="color:var(--theme-foreground-focus)";>A map</h1>
-    <span>Map of Nova Scotia</span>
-</div>
-
+ <div class = "grid grid-cols-1">
+     <h1 style="color:var(--theme-foreground-focus)";>A map</h1>
+     <span>Map of Nova Scotia showing the Nova Scotia School for Adult Learning website.</span>
+     Future ideas:
+     1. add chloropleth layer for demographic data, 2. markers for study locations based on author affiliation, 3. add funding layer for where projects where funded (from studies)
+ </div>
 
 ```js
+ const org_map_markers = FileAttachment("/data/org_locations_ns.csv").csv()
+
 const div = display(document.createElement("div"));
 div.style = "height: 600px;";
 
 const map = L.map(div)
-  .setView([44.682, -63.744], 8);
+  .setView([45.200, -63.144], 7);
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 })
   .addTo(map);
-
-L.marker([44.682, -63.744])
-  .addTo(map)
-  .bindPopup("A nice popup<br> indicating a point of interest.")
-  .openPopup();
-
-L.marker([45.100, -64.744])
-  .addTo(map)
-  .bindPopup("Location name<br> another point of interest.")
-  .openPopup();
-
+// add markers from csv file
+org_map_markers.then(data => {
+  data.forEach(d => {
+    L.marker([d.lat, d.lng])
+      .addTo(map)
+      .bindPopup(`<b>${d.organization}</b><br>${d.address}`);
+  });
+});
 var popup = L.popup();
 function onMapClick(e) {
   popup
@@ -113,4 +112,4 @@ function onMapClick(e) {
     .openOn(map);
 }
 ```
-<p>More documentation on Leaflet can be found <a href="https://leafletjs.com/examples/quick-start/">here.</a>Map data from OpenStreetMap is copyrighted and is available under the <a href="https://openstreetmap.org/copyright">Open Database license.</a></p>
+<p>Data is from novascotia.ca and can be found <a href="https://novascotia.ca/adult-learning/community-learning-organizations.pdf">here.</a> More documentation on Leaflet can be found <a href="https://leafletjs.com/examples/quick-start/">here.</a>Map data from OpenStreetMap is copyrighted and is available under the <a href="https://openstreetmap.org/copyright">Open Database license.</a></p>

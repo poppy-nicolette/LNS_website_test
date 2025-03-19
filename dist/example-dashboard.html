@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.db1cdf55.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
 <link rel="stylesheet" type="text/css" href="./_npm/leaflet@1.9.4/dist/leaflet.css">
-<link rel="modulepreload" href="./_observablehq/client.056b7b93.js">
+<link rel="modulepreload" href="./_observablehq/client.d19ca2dd.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.fc5dbcd7.js">
 <link rel="modulepreload" href="./_npm/leaflet@1.9.4/82e0844d.js">
@@ -25,11 +25,12 @@
 <link rel="icon" href="./_file/icon.a622f8f7.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.056b7b93.js";
+import {define} from "./_observablehq/client.d19ca2dd.js";
 import {registerFile} from "./_observablehq/stdlib.fc5dbcd7.js";
 
 registerFile("./basic_table.json", {"name":"./basic_table.json","mimeType":"application/json","path":"./_file/basic_table.4f21c52b.json","lastModified":1742238745166,"size":24892});
 registerFile("./card_2.csv", {"name":"./card_2.csv","mimeType":"text/csv","path":"./_file/card_2.3c1e78ed.csv","lastModified":1742232410062,"size":9});
+registerFile("./data/org_locations_ns.csv", {"name":"./data/org_locations_ns.csv","mimeType":"text/csv","path":"./_file/data/org_locations_ns.698f2ba8.csv","lastModified":1742403191573,"size":4349});
 
 define({id: "2ae703d0", outputs: ["L"], body: async () => {
 const L = await import("./_npm/leaflet@1.9.4/82e0844d.js");
@@ -87,29 +88,28 @@ resize((width) => Inputs.table(search,{width:{title:400},
 ))
 }});
 
-define({id: "af9b6116", inputs: ["display","L"], outputs: ["div","map","popup","onMapClick"], body: (display,L) => {
+define({id: "8ed3b284", inputs: ["FileAttachment","display","L"], outputs: ["org_map_markers","div","map","popup","onMapClick"], body: (FileAttachment,display,L) => {
+ const org_map_markers = FileAttachment("./data/org_locations_ns.csv").csv()
+
 const div = display(document.createElement("div"));
 div.style = "height: 600px;";
 
 const map = L.map(div)
-  .setView([44.682, -63.744], 8);
+  .setView([45.200, -63.144], 7);
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 })
   .addTo(map);
-
-L.marker([44.682, -63.744])
-  .addTo(map)
-  .bindPopup("A nice popup<br> indicating a point of interest.")
-  .openPopup();
-
-L.marker([45.100, -64.744])
-  .addTo(map)
-  .bindPopup("Location name<br> another point of interest.")
-  .openPopup();
-
+// add markers from csv file
+org_map_markers.then(data => {
+  data.forEach(d => {
+    L.marker([d.lat, d.lng])
+      .addTo(map)
+      .bindPopup(`<b>${d.organization}</b><br>${d.address}`);
+  });
+});
 var popup = L.popup();
 function onMapClick(e) {
   popup
@@ -117,7 +117,7 @@ function onMapClick(e) {
     .setContent("You clicked the map at " + e.latlng.toString())
     .openOn(map);
 }
-return {div,map,popup,onMapClick};
+return {org_map_markers,div,map,popup,onMapClick};
 }});
 
 </script>
@@ -135,6 +135,7 @@ return {div,map,popup,onMapClick};
     <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./example-dashboard">Summary Dashboard</a></li>
     <li class="observablehq-link"><a href="./example-report">Point in time Report</a></li>
+    <li class="observablehq-link"><a href="./biblio_analysis">Bibliometric Analysis</a></li>
     <li class="observablehq-link"><a href="./project_documentation">Project Documentation</a></li>
     </ol>
   </section>
@@ -181,12 +182,14 @@ return {div,map,popup,onMapClick};
     <div class="card"><observablehq-loading></observablehq-loading><!--:36abfe45:--></div>
 </div>
 <!--  Map of Nova Scotia see documentation here: https://observablehq.com/framework/lib/leaflet -->
-<div class="grid grid-cols-1">
-    <h1 style="color:var(--theme-foreground-focus)" ;="">A map</h1>
-    <span>Map of Nova Scotia</span>
-</div>
-<div class="observablehq observablehq--block"><!--:af9b6116:--></div>
-<p>More documentation on Leaflet can be found <a href="https://leafletjs.com/examples/quick-start/" target="_blank" rel="noopener noreferrer">here.</a>Map data from OpenStreetMap is copyrighted and is available under the <a href="https://openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">Open Database license.</a></p>
+ <div class="grid grid-cols-1">
+     <h1 style="color:var(--theme-foreground-focus)" ;="">A map</h1>
+     <span>Map of Nova Scotia showing the Nova Scotia School for Adult Learning website.</span>
+     Future ideas:
+     1. add chloropleth layer for demographic data, 2. markers for study locations based on author affiliation, 3. add funding layer for where projects where funded (from studies)
+ </div>
+<div class="observablehq observablehq--block"><!--:8ed3b284:--></div>
+<p>Data is from novascotia.ca and can be found <a href="https://novascotia.ca/adult-learning/community-learning-organizations.pdf" target="_blank" rel="noopener noreferrer">here.</a> More documentation on Leaflet can be found <a href="https://leafletjs.com/examples/quick-start/" target="_blank" rel="noopener noreferrer">here.</a>Map data from OpenStreetMap is copyrighted and is available under the <a href="https://openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">Open Database license.</a></p>
 </div></main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Literacy Nova Scotia</span></a><a rel="next" href="./example-report"><span>Point in time Report</span></a></nav>
